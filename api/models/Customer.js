@@ -30,8 +30,10 @@ module.exports = {
         return re.test(String(email).toLowerCase());
       }
     }
-
-  },
+  }
+  // customToJSON: function() {
+  //   return _.omit(this, ['name'])
+  // }
 
 };
 
