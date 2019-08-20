@@ -3,7 +3,7 @@ const util = require('util');
 describe('Customer (model)', function() {
 
   describe('Find ...', () => {
-    it('should find all records', () => {
+    it('... should find all records', () => {
 
       return new Promise( async (resolve, reject) => {
           const customers = await Customer.find()
