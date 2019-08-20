@@ -29,6 +29,14 @@ module.exports = {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
       }
+    },
+    avatar: {
+      type: 'string',
+      defaultsTo: `https://api.adorable.io/avatars/256/${Date.now()}.png`
+    },
+    birthdate: {
+      type: 'string',
+      allowNull: true
     }
   }
   // customToJSON: function() {
