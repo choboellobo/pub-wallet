@@ -15,8 +15,7 @@ module.exports = {
   async create(req, res) {
       try {
         const customer =  await Customer.create(req.body).fetch();
-        const url = req.protocol + '://' + req.get('host') + req.originalUrl + '/' + customer.id
-        res.json({id: customer.id, url });
+        res.json({id: customer.id });
       }catch(e) {
         res.status(400).json(e);
       }
