@@ -37,6 +37,10 @@ module.exports = {
     birthdate: {
       type: 'string',
       allowNull: true
+    },
+    tickets: {
+      collection: 'ticket',
+      via: 'customer'
     }
   }
   // customToJSON: function() {
