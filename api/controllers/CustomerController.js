@@ -19,6 +19,19 @@ module.exports = {
       }catch(error) {
         res.serverError(error);
       }
+    },
+
+    async find(req, res) {
+
+      try {
+        if(req.user.model == 'customer') {
+          const customer = await Customer.find({id: req.user.id});
+          res.json(customer);
+        }else res.status(403).json({message: 'Forbidden'})
+
+      }catch(error) {
+        res.serverError(error)
+      }
     }
 };
 

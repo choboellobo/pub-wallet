@@ -17,6 +17,12 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  //'*': true,
+  'CustomerController': {
+    '*': ['isAuthorized']
+  },
+  'TicketController': {
+    '*': ['isAuthorized']
+  }
 
 };
