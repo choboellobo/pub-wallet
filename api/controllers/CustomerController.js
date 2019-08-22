@@ -20,8 +20,13 @@ module.exports = {
         res.serverError(error);
       }
     },
-
-    async find(req, res) {
+/**
+ * Find customers
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+async find(req, res) {
 
       try {
         if(req.user.model == 'customer') {

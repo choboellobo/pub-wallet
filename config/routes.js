@@ -20,7 +20,8 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  'POST /login': 'AuthController.loginCustomer'
+  'POST /login/customer': 'AuthController.loginCustomer',
+  'POST /login/business': 'AuthController.loginBusiness'
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

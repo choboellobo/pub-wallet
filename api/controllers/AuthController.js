@@ -21,6 +21,17 @@ module.exports = {
     }catch(error) {
       res.serverError(error)
     }
+  },
+  async loginBusiness(req, res) {
+    try {
+      const business = await Business.findOne({cif: req.body.cif})
+      res.json({
+        business,
+        token: jwt.sign({id: business.id, model: 'business'})
+      })
+    }catch(error) {
+      res.serverError(error)
+    }
   }
 };
 

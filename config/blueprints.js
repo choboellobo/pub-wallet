@@ -38,6 +38,6 @@ module.exports.blueprints = {
 
   // shortcuts: true,
 
-  pluralize: true
+  //pluralize: true
 
 };

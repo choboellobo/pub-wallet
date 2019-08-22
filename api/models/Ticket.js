@@ -16,6 +16,10 @@ module.exports = {
     customer :{
       model: 'customer',
       required: true
+    },
+    business: {
+      model: 'business',
+      required: true
     }
   },
   findByCustomer(customer)  {
