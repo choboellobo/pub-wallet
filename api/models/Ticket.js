@@ -24,6 +24,10 @@ module.exports = {
     business: {
       model: 'business',
       required: true
+    },
+    transactions: {
+      collection: 'transaction',
+      via: 'ticket'
     }
   },
 
