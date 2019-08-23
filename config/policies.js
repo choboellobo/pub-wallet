@@ -21,8 +21,8 @@ module.exports.policies = {
   'CustomerController': {
     '*': ['isAuthorized']
   },
-  // 'TicketController': {
-  //   '*': ['isAuthorized']
-  // }
+  'TicketController': {
+    '*': ['isAuthorized']
+  }
 
 };

@@ -13,7 +13,10 @@ module.exports = (req, res, next) => {
 				token = credentials;
       }
       jwt.verify(token, (error, decoded) => {
-        if(error) responseNotAuth(res)
+        if(error) {
+          console.log(error)
+          responseNotAuth(res)
+        }
         else {
           req.user = decoded
           next()

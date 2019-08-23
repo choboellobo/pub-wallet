@@ -9,8 +9,12 @@ module.exports = {
 
   attributes: {
 
-    name: {
-      type: 'string',
+    expiresIn: {
+      type: 'number',
+      defaultsTo: Date.now() + ( 3 * 2678400000 )
+    },
+    product: {
+      model: 'product',
       required: true
     },
     customer :{
@@ -22,16 +26,6 @@ module.exports = {
       required: true
     }
   },
-  findByCustomer(customer)  {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const result = await Ticket.find({customer})
-        resolve(result)
-      } catch(error) {
-        reject(error)
-      }
-    })
-  }
 
 };
 
