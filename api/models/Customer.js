@@ -19,7 +19,7 @@ module.exports = {
     },
     lastName: {
       type: 'string',
-      allowNull: true
+      allowNull: false
     },
     email: {
       type: 'string',

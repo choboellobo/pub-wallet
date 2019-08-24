@@ -4,7 +4,7 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-
+const bcrypt = require("bcrypt")
 module.exports = {
 
   async loginCustomer(req, res) {
@@ -24,14 +24,23 @@ module.exports = {
   },
   async loginBusiness(req, res) {
     try {
-      const business = await Business.findOne({cif: req.body.cif})
-      res.json({
-        business,
-        token: jwt.sign({id: business.id, model: 'business'})
+      const business = await Business.findOne({cif: req.body.cif })
+      if(!business) return res.status(404).json({message: 'Error during process login'})
+      bcrypt.compare(req.body.password, business.password, (error, isCorrect) => {
+        if(error) return res.serverError(error)
+        else {
+          if(!isCorrect) return res.status(404).json({message: 'Error during process login'})
+          delete business.password
+          res.json({
+            business,
+            token: jwt.sign({id: business.id, model: 'business'})
+          })
+        }
       })
     }catch(error) {
       res.serverError(error)
     }
+
   }
 };
 
