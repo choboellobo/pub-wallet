@@ -29,7 +29,9 @@ module.exports.policies = {
     '*': ['isAuthorized', 'onlyBusiness']
   },
   'TicketController': {
-    '*': ['isAuthorized']
+    '*': ['isAuthorized'],
+    'destroy': false,
+    'update': false
   }
 
 };

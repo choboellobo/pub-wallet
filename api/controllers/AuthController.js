@@ -31,7 +31,7 @@ module.exports = {
         else {
           if(!isCorrect) return res.status(404).json({message: 'Error during process login'})
           delete business.password
-          res.json({
+          res.status(201).json({
             business,
             token: jwt.sign({id: business.id, model: 'business'})
           })
