@@ -24,6 +24,10 @@ module.exports = {
       type: 'number',
       required: true
     },
+    expiresIn: {
+      type: 'number',
+      defaultsTo: Date.now() + ( 3 * 2678400000 )
+    }
   },
   beforeCreate(values, done) {
     if(!Number.isInteger(values.price)) values.price = values.price.toFixed(2);

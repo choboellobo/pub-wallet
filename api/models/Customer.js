@@ -36,7 +36,7 @@ module.exports = {
     },
     birthdate: {
       type: 'string',
-      allowNull: true
+      allowNull: false
     },
     tickets: {
       collection: 'ticket',

@@ -9,10 +9,6 @@ module.exports = {
 
   attributes: {
 
-    expiresIn: {
-      type: 'number',
-      defaultsTo: Date.now() + ( 3 * 2678400000 )
-    },
     product: {
       model: 'product',
       required: true

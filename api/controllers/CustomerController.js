@@ -13,6 +13,7 @@ module.exports = {
    * @param {*} res
    */
   async create(req, res) {
+
       try {
         const customer =  await Customer.create(req.body).fetch();
         res.json({id: customer.id });

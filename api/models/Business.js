@@ -39,7 +39,7 @@ module.exports = {
     }
 
   },
-  customToJson() {
+  customToJSON() {
     return _.omit(this, ['password'])
   },
   beforeCreate(business, done) {
