@@ -50,6 +50,11 @@ module.exports = {
         done()
       })
     })
+  },
+  async findRandom() {
+    const all = await Business.find();
+    const random = Math.floor(Math.random() * all.length)
+    return all[random].id;
   }
 
 };

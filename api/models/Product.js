@@ -27,6 +27,10 @@ module.exports = {
     expiresIn: {
       type: 'number',
       defaultsTo: Date.now() + ( 3 * 2678400000 )
+    },
+    business: {
+      model:'business',
+      required: true
     }
   },
   beforeCreate(values, done) {
