@@ -3,10 +3,21 @@ const expect = require("chai").expect;
 describe('AuthController.business', function() {
 
   describe('#login()', function() {
+    let cif
+
+    beforeEach( async ()=>{
+      cif = Date.now();
+      const nuevo = await Business.create({email: Date.now()+'@yo.es', name: 'test', cif, password: '1234567890'})
+    })
+
+    afterEach( async () => {
+      const done = await Business.destroy({});
+    })
+
     it('should return a business and a token', function (done) {
       supertest(sails.hooks.http.app)
       .post('/login/business')
-      .send({ cif: 'V9622710C', password: '1234567890' })
+      .send({ cif , password: '1234567890' })
       .expect(201)
       .end( (err, res) => {
         if (err) throw err;

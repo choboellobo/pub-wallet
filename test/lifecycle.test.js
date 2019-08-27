@@ -7,6 +7,7 @@ before(function(done) {
   this.timeout(5000);
 
   sails.lift({
+    models: { connection: 'mongodb_testing' },
     // Your Sails app's configuration files will be loaded automatically,
     // but you can also specify any other special overrides here for testing purposes.
 
