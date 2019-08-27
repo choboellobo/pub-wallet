@@ -1,13 +1,17 @@
 const supertest = require('supertest');
 const expect = require("chai").expect;
+const faker = require('faker');
 describe('AuthController.business', function() {
 
   describe('#login()', function() {
     let cif
+    let password = faker.internet.password()
 
     beforeEach( async ()=>{
       cif = Date.now();
-      const nuevo = await Business.create({email: Date.now()+'@yo.es', name: 'test', cif, password: '1234567890'})
+      const business_model = {email: faker.internet.email() , name: faker.name.findName() , cif, password}
+      await Business.create( business_model )
+
     })
 
     afterEach( async () => {
@@ -17,7 +21,7 @@ describe('AuthController.business', function() {
     it('should return a business and a token', function (done) {
       supertest(sails.hooks.http.app)
       .post('/login/business')
-      .send({ cif , password: '1234567890' })
+      .send({ cif , password })
       .expect(201)
       .end( (err, res) => {
         if (err) throw err;
