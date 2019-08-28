@@ -16,7 +16,7 @@ module.exports = {
         name: faker.name.firstName(),
         email: faker.internet.email(),
         cif: faker.random.number(),
-        password: faker.internet.password()
+        password: '1234567890'
       }
       await Business.create(business);
     }

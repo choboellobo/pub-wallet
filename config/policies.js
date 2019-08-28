@@ -20,9 +20,11 @@ module.exports.policies = {
   //'*': true,
   'CustomerController': {
     '*': ['isAuthorized'],
+    'update': ['onlyCustomer'],
+    'destroy': false,
     'create': true
   },
-  'BussinesController': {
+  'BusinessController': {
     '*': ['isAuthorized', 'onlyBusiness']
   },
   'ProductController': {
