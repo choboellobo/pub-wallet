@@ -34,6 +34,11 @@ module.exports.policies = {
     '*': ['isAuthorized'],
     'destroy': false,
     'update': false
+  },
+  'TransactionController': {
+    '*': ['isAuthorized'],
+    'destroy': false,
+    'update': false
   }
 
 };

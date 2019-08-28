@@ -18,5 +18,11 @@ module.exports = {
     }
   },
 
+  async countTransactionsByTicket( ticket ) {
+    const tickets = await Transaction.find({ ticket })
+    if(tickets.length == 0) return 0
+    else return tickets.map( t => t.item).reduce( (a,b) => a + b)
+  }
+
 };
 
