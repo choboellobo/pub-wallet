@@ -36,6 +36,15 @@ module.exports = {
   beforeCreate(values, done) {
     if(!Number.isInteger(values.price)) values.price = values.price.toFixed(2);
     done();
+  },
+  async findRandom() {
+    const all = await Product.find();
+    const random = Math.floor(Math.random() * all.length)
+    return all[random].id;
+  },
+  async findBusiness( id ) {
+    const product = await Product.findOne({ id }).populate('business')
+    return product.business.id
   }
 
 };

@@ -42,6 +42,11 @@ module.exports = {
       collection: 'ticket',
       via: 'customer'
     }
+  },
+  async findRandom() {
+    const all = await Customer.find();
+    const random = Math.floor(Math.random() * all.length)
+    return all[random].id;
   }
   // customToJSON: function() {
   //   return _.omit(this, ['name'])

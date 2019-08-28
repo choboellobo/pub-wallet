@@ -9,13 +9,11 @@ module.exports = {
 
    async find(req, res) {
     try{
-      const query = {}
-            query[req.user.model] = req.user.id;
-      if(req.query.active) query.expiresIn = {'>': Date.now() }
 
-      let tickets = await Ticket.find({where: query}).populate('product').populate('customer').populate('business').populate('transactions')
+      let tickets = await Ticket.find({ [req.user.model]: req.user.id }).populate('product').populate('customer').populate('business').populate('transactions')
       tickets = tickets.map( ticket => {
-        ticket.transactions_count = ticket.transactions.map(t => t.item).reduce( (a,b) => a + b )
+        if(ticket.transactions.length > 0 ) ticket.transactions_count = ticket.transactions.map(t => t.item).reduce( (a,b) => a + b )
+        else ticket.transactions = 0
         return ticket
       })
       res.json(tickets)
