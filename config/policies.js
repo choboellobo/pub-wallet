@@ -28,7 +28,8 @@ module.exports.policies = {
     '*': ['isAuthorized', 'onlyBusiness']
   },
   'ProductController': {
-    '*': ['isAuthorized', 'onlyBusiness']
+    '*': ['isAuthorized'],
+    'create': ['onlyBusiness']
   },
   'TicketController': {
     '*': ['isAuthorized'],
@@ -37,6 +38,7 @@ module.exports.policies = {
   },
   'TransactionController': {
     '*': ['isAuthorized'],
+    'find': false,
     'destroy': false,
     'update': false
   }

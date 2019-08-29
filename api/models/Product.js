@@ -31,6 +31,10 @@ module.exports = {
     business: {
       model:'business',
       required: true
+    },
+    tickets: {
+      collection: 'ticket',
+      via: 'product'
     }
   },
   beforeCreate(values, done) {
