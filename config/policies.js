@@ -33,6 +33,7 @@ module.exports.policies = {
   },
   'TicketController': {
     '*': ['isAuthorized'],
+    'create': false,
     'destroy': false,
     'update': false
   },
