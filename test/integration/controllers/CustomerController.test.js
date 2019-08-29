@@ -18,4 +18,16 @@ describe('In a CustomerController ...', () => {
         done()
       })
   })
+
+  it('...shouldn´t create a customer if is missing some parameter', done => {
+    supertest(sails.hooks.http.app)
+      .post('/api/v1/customer')
+      .send({})
+      .end( (error, res) => {
+        expect(res.status).to.equal(400)
+        done()
+      })
+  })
+
+
 })

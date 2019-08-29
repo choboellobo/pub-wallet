@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const faker = require('faker');
 describe('AuthController.business', function() {
 
-  describe('#login()', function() {
+  describe('... login ', function() {
     let cif
     let password = faker.internet.password()
 
