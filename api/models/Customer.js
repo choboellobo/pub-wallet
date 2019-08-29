@@ -35,7 +35,7 @@ module.exports = {
       defaultsTo: `https://api.adorable.io/avatars/256/${Date.now()}.png`
     },
     birthdate: {
-      type: 'string',
+      type: 'ref',
       allowNull: false
     },
     tickets: {

@@ -16,7 +16,7 @@ module.exports = {
 
       try {
         const customer =  await Customer.create(req.body).fetch();
-        res.json({id: customer.id });
+        res.status(201).json({id: customer.id });
       }catch(error) {
         res.serverError(error);
       }
