@@ -56,10 +56,9 @@ module.exports.datastores = {
 
   },
 
-  mongodb_testing: {
-
-    adapter: 'sails-mongo',
-    url: 'mongodb://root@localhost/pub-test'
-  }
+  // mongodb_testing: {
+  //   adapter: 'sails-mongo',
+  //   url: 'mongodb://root@localhost/pub-test'
+  // }
 
 };
