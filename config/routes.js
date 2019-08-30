@@ -7,7 +7,7 @@
  * For more information on configuring custom routes, check out:
  * https://sailsjs.com/anatomy/config/routes-js
  */
-
+const blueprint_config = require('./blueprints').blueprints;
 module.exports.routes = {
 
   /***************************************************************************
@@ -20,8 +20,10 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-
-
+  'POST /login/customer': 'AuthController.loginCustomer',
+  'POST /login/business': 'AuthController.loginBusiness',
+  [`GET ${blueprint_config.prefix}/business/me`]: 'BusinessController.me',
+  [`POST ${blueprint_config.prefix}/transaction/create`]: 'TransactionController.create'
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

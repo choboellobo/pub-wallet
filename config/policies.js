@@ -17,6 +17,32 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  //'*': true,
+  'CustomerController': {
+    '*': ['isAuthorized'],
+    'update': ['onlyCustomer'],
+    'destroy': false,
+    'create': true
+  },
+  'BusinessController': {
+    '*': ['isAuthorized', 'onlyBusiness'],
+    'create': true
+  },
+  'ProductController': {
+    '*': ['isAuthorized'],
+    'create': ['onlyBusiness']
+  },
+  'TicketController': {
+    '*': ['isAuthorized'],
+    'create': false,
+    'destroy': false,
+    'update': false
+  },
+  'TransactionController': {
+    '*': ['isAuthorized'],
+    'find': false,
+    'destroy': false,
+    'update': false
+  }
 
 };

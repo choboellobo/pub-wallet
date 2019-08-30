@@ -34,6 +34,9 @@ module.exports.datastores = {
 
   default: {
 
+    adapter: 'sails-mongo',
+    url: 'mongodb://root@localhost/pub'
+
     /***************************************************************************
     *                                                                          *
     * Want to use a different database during development?                     *
@@ -53,5 +56,10 @@ module.exports.datastores = {
 
   },
 
+  mongodb_testing: {
+
+    adapter: 'sails-mongo',
+    url: 'mongodb://root@localhost/pub-test'
+  }
 
 };
