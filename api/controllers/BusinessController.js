@@ -5,6 +5,15 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 module.exports = {
+  async create(req, res) {
+    try {
+      const business = await Business.create(req.body).fetch()
+      res.status(201).json({ id: business.id })
+
+    }catch(error) {
+      res.serverError(error)
+    }
+  },
 
   async me(req, res) {
     try {
