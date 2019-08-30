@@ -8,8 +8,16 @@
 module.exports = {
 
   async find(req, res) {
-    const products = await Product.find({business: req.user.id }).populate('tickets')
-    res.json(products)
+    const limit = 100
+    const query = {
+      where: { business: req.user.id },
+      limit,
+      skip: (+req.query.page * limit) - limit || 0
+    }
+    console.log(query)
+    const total = await Product.count(query.where)
+    const products = await Product.find(query).populate('tickets')
+    res.json({total, products })
   }
 };
 

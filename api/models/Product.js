@@ -28,6 +28,10 @@ module.exports = {
       type: 'number',
       defaultsTo: Date.now() + ( 3 * 2678400000 )
     },
+    archived: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     business: {
       model:'business',
       required: true
