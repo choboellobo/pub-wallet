@@ -38,6 +38,10 @@ module.exports.policies = {
     'destroy': false,
     'update': false
   },
+  'PaymentController': {
+    '*': ['isAuthorized'],
+    'find': ['isAuthorized', 'onlyBusiness']
+  },
   'TransactionController': {
     '*': ['isAuthorized'],
     'find': false,

@@ -33,6 +33,7 @@ module.exports = {
         .populate('customer')
         .populate('business')
         .populate('transactions')
+        .populate('payment')
         tickets = tickets.map(  async (ticket) => {
           ticket.transations_count =  await Transaction.countTransactionsByTicket(ticket.id)
           return ticket

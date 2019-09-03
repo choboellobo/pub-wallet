@@ -36,6 +36,15 @@ module.exports = {
     }catch(error) {
       res.errorServer(error)
     }
+  },
+
+  async update(req, res) {
+   try{
+    const product = await Product.updateOne(req.params.id).set(req.body)
+    res.json(product)
+   }catch(error) {
+     res.serverError(error)
+   }
   }
 };
 
