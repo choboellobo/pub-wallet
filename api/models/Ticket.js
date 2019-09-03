@@ -21,6 +21,9 @@ module.exports = {
       model: 'business',
       required: true
     },
+    payment: {
+      model: 'payment'
+    },
     transactions: {
       collection: 'transaction',
       via: 'ticket'

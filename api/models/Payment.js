@@ -10,9 +10,10 @@ const createTicket = async (values, next) => {
     const ticket = await Ticket.create({
       customer: values.customer,
       business: values.business,
-      product: values.product
+      product: values.product,
+      payment: values.id
     }).fetch()
-    const done = await Payment.update({id: values.id}, {...values,ticket: ticket.id,  completed: true}).fetch()
+    const done = await Payment.update({id: values.id}, {...values, ticket: ticket.id,  completed: true}).fetch()
     console.log(done)
   }
   next()

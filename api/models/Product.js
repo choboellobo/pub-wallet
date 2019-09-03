@@ -28,7 +28,7 @@ module.exports = {
       type: 'number',
       defaultsTo: Date.now() + ( 3 * 2678400000 )
     },
-    archived: {
+    for_sale: {
       type: 'boolean',
       defaultsTo: false
     },

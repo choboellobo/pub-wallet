@@ -30,7 +30,7 @@ module.exports.policies = {
   },
   'ProductController': {
     '*': ['isAuthorized'],
-    'create': ['onlyBusiness']
+    'create': ['isAuthorized', 'onlyBusiness']
   },
   'TicketController': {
     '*': ['isAuthorized'],

@@ -25,11 +25,11 @@ module.exports = {
   async loginBusiness(req, res) {
     try {
       const business = await Business.findOne({cif: req.body.cif })
-      if(!business) return res.status(404).json({message: 'Error during process login'})
+      if(!business) return res.status(404).json({message: 'Cif o contraseña incorrecta'})
       bcrypt.compare(req.body.password, business.password, (error, isCorrect) => {
         if(error) return res.serverError(error)
         else {
-          if(!isCorrect) return res.status(404).json({message: 'Error during process login'})
+          if(!isCorrect) return res.status(404).json({message: 'Cif o contraseña incorrecta'})
           delete business.password
           res.status(201).json({
             business,

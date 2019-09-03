@@ -14,10 +14,28 @@ module.exports = {
       limit,
       skip: (+req.query.page * limit) - limit || 0
     }
-    console.log(query)
     const total = await Product.count(query.where)
     const products = await Product.find(query).populate('tickets')
     res.json({total, products })
+  },
+
+
+  async ticketsByProduct(req, res) {
+    try {
+      let tickets = await Ticket.find({ product: req.params.id })
+            .populate('product')
+            .populate('customer')
+            .populate('payment')
+            .populate('transactions')
+
+      tickets = tickets.map( async (ticket) => {
+        ticket.transations_count = await Transaction.countTransactionsByTicket(ticket.id)
+        return ticket
+      })
+      res.json(await Promise.all(tickets))
+    }catch(error) {
+      res.errorServer(error)
+    }
   }
 };
 
