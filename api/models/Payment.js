@@ -15,7 +15,7 @@ const createTicket = async (values, next) => {
       business: values.business,
       product: values.product,
       payment: values.id,
-      expires: product.expiresInDate || moment().add( product.expiresIn, 'days').toString()
+      expires: product.expiresInDate || moment().add( product.expiresIn, 'days').toISOString()
     }).fetch()
     const done = await Payment.update({id: values.id}, {...values, ticket: ticket.id,  completed: true}).fetch()
 
