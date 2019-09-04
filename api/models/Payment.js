@@ -4,17 +4,21 @@
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
+const moment = require('moment');
 const createTicket = async (values, next) => {
 
   if(values.status == 'succeeded' && !values.completed) {
+
+    const product = await Product.findOne(values.product)
     const ticket = await Ticket.create({
       customer: values.customer,
       business: values.business,
       product: values.product,
-      payment: values.id
+      payment: values.id,
+      expires: product.expiresInDate || moment().add( product.expiresIn, 'days').toString()
     }).fetch()
     const done = await Payment.update({id: values.id}, {...values, ticket: ticket.id,  completed: true}).fetch()
-    console.log(done)
+
   }
   next()
 }

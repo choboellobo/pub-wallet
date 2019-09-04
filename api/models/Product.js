@@ -26,7 +26,15 @@ module.exports = {
     },
     expiresIn: {
       type: 'number',
-      defaultsTo: Date.now() + ( 3 * 2678400000 )
+      defaultsTo: 90
+    },
+    exporiesInDate: {
+      type: 'string',
+      allowNull: true
+    },
+    icon: {
+      type: 'string',
+      required: true
     },
     for_sale: {
       type: 'boolean',

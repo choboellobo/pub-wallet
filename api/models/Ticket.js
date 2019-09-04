@@ -24,6 +24,10 @@ module.exports = {
     payment: {
       model: 'payment'
     },
+    expires: {
+      type: 'string',
+      required: true
+    },
     transactions: {
       collection: 'transaction',
       via: 'ticket'
