@@ -5,6 +5,7 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 const moment = require('moment');
+const  ObjectId = require('mongodb').ObjectID;
 module.exports = {
 
     async create(req, res) {
@@ -29,6 +30,45 @@ module.exports = {
           }else res.status(403).json({ message: `Transacción no permitida, tienes ${transaction_before}, quieres ${item}, puedes ${ticket.product.items}, te quedan ${ticket.product.items - transaction_before}`})
 
         }else res.status(403).json({ message: 'Solo el dueño del producto puede realizar transacciones'})
+      }catch(error) {
+        res.serverError(error)
+      }
+    },
+    async findByTicket(req, res) {
+      try{
+        const db = Transaction.getDatastore().manager;
+        db.collection('transaction')
+        .aggregate([
+          {
+            $match: {
+              ticket: new ObjectId("5d764a8ebed2ee0cfd1be311")
+            },
+          },
+          {
+            $lookup:
+              {
+                from: 'ticket',
+                let: { t_ticket: '$ticket'},
+                pipeline: [
+                  {
+                    $lookup: {
+                      from : 'customer',
+                      localField: 'customer',
+                      foreignField : '_id',
+                      as: 'customer'
+                    }
+                  }
+                ],
+                as: 'ticket'
+              }
+         },
+        ])
+        .toArray((err, results) => {
+          console.log(err)
+          res.json(results)
+        })
+
+
       }catch(error) {
         res.serverError(error)
       }

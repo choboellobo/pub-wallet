@@ -24,7 +24,8 @@ module.exports.routes = {
   'POST /login/business': 'AuthController.loginBusiness',
   [`GET ${blueprint_config.prefix}/business/me`]: 'BusinessController.me',
   [`POST ${blueprint_config.prefix}/transaction/create`]: 'TransactionController.create',
-  [`GET ${blueprint_config.prefix}/product/:id/tickets`]: 'Product.ticketsByProduct'
+  [`GET ${blueprint_config.prefix}/product/:id/tickets`]: 'Product.ticketsByProduct',
+  [`GET ${blueprint_config.prefix}/ticket/:id/transactions`] : 'TransactionController.findByTicket'
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
