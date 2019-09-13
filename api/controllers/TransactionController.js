@@ -41,7 +41,7 @@ module.exports = {
         .aggregate([
           {
             $match: {
-              ticket: new ObjectId("5d764a8ebed2ee0cfd1be311")
+              ticket: new ObjectId(req.params.id)
             },
           },
           {
@@ -50,6 +50,9 @@ module.exports = {
                 from: 'ticket',
                 let: { t_ticket: '$ticket'},
                 pipeline: [
+                  {
+                    $unwind: "$customer"
+                  },
                   {
                     $lookup: {
                       from : 'customer',
@@ -61,11 +64,12 @@ module.exports = {
                 ],
                 as: 'ticket'
               }
-         },
+         }
         ])
-        .toArray((err, results) => {
-          console.log(err)
-          res.json(results)
+        .toArray( async (err, results) => {
+          if(err) return res.serverError(err)
+          const total =  await Transaction.countTransactionsByTicket(req.params.id)
+          res.json({transactions: [...results], total })
         })
 
 
