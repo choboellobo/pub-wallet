@@ -26,12 +26,14 @@ module.exports = {
     },
     password: {
       type: 'string',
-      required: true
+      required: true,
+      index: true
     },
     cif: {
       type: 'string',
       required: true,
-      unique: true
+      unique: true,
+      index: true
     },
     tickets: {
       collection: 'ticket',
