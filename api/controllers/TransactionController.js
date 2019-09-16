@@ -26,8 +26,10 @@ module.exports = {
 
           if( (transaction_before + item) <= ticket.product.items ) {
             const transaction = await Transaction.create({ ticket: ticket_ref , item }).fetch()
-            res.status(201).json({...transaction, total: transaction_before + item })
-          }else res.status(403).json({ message: `Transacción no permitida, tienes ${transaction_before}, quieres ${item}, puedes ${ticket.product.items}, te quedan ${ticket.product.items - transaction_before}`})
+            const ticketRef = await Ticket.find({find: ticket_ref}).populate('product')
+            res.status(201).json({...transaction, item, total: ticket.product.item, current: transaction_before + item, product: ticket.product })
+
+          }else res.status(403).json({ message: `Transacción no permitida, quiere ${item} y te quedan ${ticket.product.items - transaction_before} de  ${transaction_before}.`})
 
         }else res.status(403).json({ message: 'Solo el dueño del producto puede realizar transacciones'})
       }catch(error) {
