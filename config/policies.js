@@ -26,17 +26,22 @@ module.exports.policies = {
   },
   'BusinessController': {
     '*': ['isAuthorized', 'onlyBusiness'],
-    'create': true
+    'create': true,
+    'new': true
   },
   'ProductController': {
     '*': ['isAuthorized'],
-    'create': ['onlyBusiness']
+    'create': ['isAuthorized', 'onlyBusiness']
   },
   'TicketController': {
     '*': ['isAuthorized'],
     'create': false,
     'destroy': false,
     'update': false
+  },
+  'PaymentController': {
+    '*': ['isAuthorized'],
+    'find': ['isAuthorized', 'onlyBusiness']
   },
   'TransactionController': {
     '*': ['isAuthorized'],

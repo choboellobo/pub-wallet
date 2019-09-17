@@ -22,6 +22,16 @@ module.exports = {
     }catch(error) {
       res.serverError(error)
     }
+  },
+
+
+  async new(req, res){
+    try{
+      const business = await Business.create(req.body).fetch();
+      res.status(201).json(business);
+    }catch(error) {
+      res.serverError(error)
+    }
   }
 
 };

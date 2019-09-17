@@ -26,12 +26,20 @@ module.exports = {
     },
     password: {
       type: 'string',
-      required: true
+      required: true,
+      unique: true
     },
     cif: {
       type: 'string',
       required: true,
-      unique: true
+      unique: true,
+    },
+    location: {
+      type: 'json'
+    },
+    active: {
+      type: 'boolean',
+      defaultsTo: false
     },
     tickets: {
       collection: 'ticket',

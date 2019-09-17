@@ -33,11 +33,15 @@ module.exports = {
         .populate('customer')
         .populate('business')
         .populate('transactions')
-        tickets = tickets.map(  async (ticket) => {
-          ticket.transations_count =  await Transaction.countTransactionsByTicket(ticket.id)
+        .populate('payment')
+
+        tickets = tickets.map( (ticket) => {
+          if(ticket.transactions.length > 0) ticket.transations_count = ticket.transactions.map( transaction => transaction.item).reduce( (a, b) => a + b)
+          else ticket.transations_count = 0
           return ticket
         })
-      res.json( await Promise.all(tickets) )
+
+      res.json( tickets )
     }catch(error) {
       res.serverError(error);
     }
