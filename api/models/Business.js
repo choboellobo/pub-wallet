@@ -34,6 +34,13 @@ module.exports = {
       required: true,
       unique: true,
     },
+    location: {
+      type: 'json'
+    },
+    active: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     tickets: {
       collection: 'ticket',
       via: 'business'
