@@ -12,7 +12,7 @@ module.exports = {
     req.user.model == 'business' ? business = req.user.id : business = req.query.business
     const limit = 100
     const query = {
-      where: { business , for_sale: true },
+      where: { business , ...req.query },
       limit,
       skip: (+req.query.page * limit) - limit || 0
     }
