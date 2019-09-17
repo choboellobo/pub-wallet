@@ -35,7 +35,7 @@ module.exports.datastores = {
   default: {
 
     adapter: 'sails-mongo',
-    url: process.env.NODE_ENV == 'production' ? process.env.DATABASE_URL : 'mongodb://root@localhost/pub'
+    url: process.env.NODE_ENV == 'production' ? process.env.MONGODB_URI :'mongodb://root@localhost/pub'
 
     /***************************************************************************
     *                                                                          *
@@ -56,10 +56,9 @@ module.exports.datastores = {
 
   },
 
-  mongodb_testing: {
-
-    adapter: 'sails-mongo',
-    url: 'mongodb://root@localhost/pub-test'
-  }
+  // mongodb_testing: {
+  //   adapter: 'sails-mongo',
+  //   url: 'mongodb://root@localhost/pub-test'
+  // }
 
 };
