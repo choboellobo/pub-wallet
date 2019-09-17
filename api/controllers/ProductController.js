@@ -8,9 +8,11 @@
 module.exports = {
 
   async find(req, res) {
+    let business;
+    req.user.model == 'business' ? business = req.user.id : business = req.query.business
     const limit = 100
     const query = {
-      where: { business: req.user.id },
+      where: { business , for_sale: true },
       limit,
       skip: (+req.query.page * limit) - limit || 0
     }
