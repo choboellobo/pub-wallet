@@ -11,7 +11,6 @@ module.exports = {
     try {
       const customer = await Customer.findOne({email: req.body.email})
       if(customer) {
-
         res.json({
           customer,
           token: jwt.sign({id: customer.id, model: 'customer'})

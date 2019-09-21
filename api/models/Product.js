@@ -28,7 +28,7 @@ module.exports = {
       type: 'number',
       defaultsTo: 90
     },
-    exporiesInDate: {
+    expiresInDate: {
       type: 'string',
       allowNull: true
     },
