@@ -22,6 +22,7 @@ module.exports.routes = {
   '/': { view: 'pages/homepage' },
   'POST /login/customer': 'AuthController.loginCustomer',
   'POST /login/business': 'AuthController.loginBusiness',
+  'POST /login/social': 'AuthController.socialLogin',
   [`GET ${blueprint_config.prefix}/business/me`]: 'BusinessController.me',
   [`POST ${blueprint_config.prefix}/business/new`]: 'BusinessController.new',
   [`POST ${blueprint_config.prefix}/transaction/create`]: 'TransactionController.create',

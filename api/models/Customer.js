@@ -13,10 +13,6 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    firstName: {
-      type: 'string',
-      required: true
-    },
     lastName: {
       type: 'string',
       allowNull: false
@@ -37,6 +33,10 @@ module.exports = {
     birthdate: {
       type: 'ref',
       allowNull: false
+    },
+    verified_email: {
+      type: 'boolean',
+      defaultsTo: false
     },
     tickets: {
       collection: 'ticket',

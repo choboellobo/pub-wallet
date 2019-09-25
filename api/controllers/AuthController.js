@@ -4,6 +4,7 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
+const request = require('request');
 const bcrypt = require("bcrypt")
 module.exports = {
 
@@ -21,6 +22,29 @@ module.exports = {
     }catch(error) {
       res.serverError(error)
     }
+  },
+  async socialLogin(req, res) {
+
+    request('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token='+ req.body.access_token, async (error, response, body) => {
+      if(error) return res.serverError(error)
+      body = JSON.parse(body)
+      if(response.statusCode == 200) {
+          try {
+
+            let customer = await Customer.findOne({email: body.email})
+            if(!customer) customer = await Customer.create(req.body.customer).fetch();
+            res.json({
+              customer,
+              token: jwt.sign({id: customer.id, model: 'customer'})
+            })
+
+          }catch(error) {
+            res.serverError(error)
+          }
+      }else {
+        res.status(response.statusCode).json(body)
+      }
+    })
   },
   async loginBusiness(req, res) {
     try {
