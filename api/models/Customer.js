@@ -34,6 +34,10 @@ module.exports = {
       type: 'ref',
       allowNull: false
     },
+    verified_email: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     tickets: {
       collection: 'ticket',
       via: 'customer'

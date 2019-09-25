@@ -30,21 +30,14 @@ module.exports = {
       body = JSON.parse(body)
       if(response.statusCode == 200) {
           try {
+
             let customer = await Customer.findOne({email: body.email})
-            if(customer) {
-              res.json({
-                customer,
-                token: jwt.sign({id: customer.id, model: 'customer'})
-              })
-            }else {
+            if(!customer) customer = await Customer.create(req.body.customer).fetch();
+            res.json({
+              customer,
+              token: jwt.sign({id: customer.id, model: 'customer'})
+            })
 
-              customer = await Customer.create(req.body.customer).fetch();
-              res.json({
-                customer,
-                token: jwt.sign({id: customer.id, model: 'customer'})
-              })
-
-            }
           }catch(error) {
             res.serverError(error)
           }
