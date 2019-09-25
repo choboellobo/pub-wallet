@@ -38,7 +38,7 @@ module.exports = {
               })
             }else {
 
-              customer = Customer.create(req.body.customer).fetch();
+              customer = await Customer.create(req.body.customer).fetch();
               res.json({
                 customer,
                 token: jwt.sign({id: customer.id, model: 'customer'})
