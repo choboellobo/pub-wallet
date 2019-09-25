@@ -16,6 +16,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "npm": "^6.11.1",
+    "request": "^2.88.0",
     "sails": "^1.2.2",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^2.1.1",

@@ -13,10 +13,6 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    firstName: {
-      type: 'string',
-      required: true
-    },
     lastName: {
       type: 'string',
       allowNull: false
