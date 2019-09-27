@@ -28,7 +28,13 @@ module.exports = {
   },
    async find(req, res) {
     try{
-      let tickets = await Ticket.find({ [req.user.model]: req.user.id })
+
+      const query = {}
+      if(req.user.model == 'customer') query.expires = {'>=': new Date().toISOString() }
+      let tickets = await Ticket.find({where: {
+        [req.user.model]: req.user.id,
+        ...query
+      }})
         .populate('product')
         .populate('customer')
         .populate('business')
