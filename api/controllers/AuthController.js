@@ -24,7 +24,8 @@ module.exports = {
     }
   },
   async socialLogin(req, res) {
-    if(req.body.provider == 'google.com') {
+
+    if(req.body.customer.provider == 'google.com') {
 
       request('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token='+ req.body.access_token,
       async (error, response, body) => {
@@ -48,7 +49,7 @@ module.exports = {
           }
         })
 
-    }else if(req.body.provider == 'facebook.com') {
+    }else if(req.body.customer.provider == 'facebook.com') {
       request(
         `https://graph.facebook.com/debug_token?input_token=${req.body.access_token}
         &access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`,
