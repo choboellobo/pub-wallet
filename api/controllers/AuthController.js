@@ -24,27 +24,57 @@ module.exports = {
     }
   },
   async socialLogin(req, res) {
+    if(req.body.provider == 'google.com') {
 
-    request('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token='+ req.body.access_token, async (error, response, body) => {
-      if(error) return res.serverError(error)
-      body = JSON.parse(body)
-      if(response.statusCode == 200) {
-          try {
+      request('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token='+ req.body.access_token,
+      async (error, response, body) => {
+          if(error) return res.serverError(error)
+          body = JSON.parse(body)
+          if(response.statusCode == 200) {
+              try {
 
-            let customer = await Customer.findOne({email: body.email})
-            if(!customer) customer = await Customer.create(req.body.customer).fetch();
-            res.json({
-              customer,
-              token: jwt.sign({id: customer.id, model: 'customer'})
-            })
+                let customer = await Customer.findOne({email: body.email})
+                if(!customer) customer = await Customer.create(req.body.customer).fetch();
+                res.json({
+                  customer,
+                  token: jwt.sign({id: customer.id, model: 'customer'})
+                })
 
-          }catch(error) {
-            res.serverError(error)
+              }catch(error) {
+                res.serverError(error)
+              }
+          }else {
+            res.status(response.statusCode).json(body)
           }
-      }else {
-        res.status(response.statusCode).json(body)
-      }
-    })
+        })
+
+    }else if(req.body.provider == 'facebook.com') {
+      request(
+        `https://graph.facebook.com/debug_token?input_token=${req.body.access_token}
+        &access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`,
+        async (error, response, body) => {
+          if(error) return res.serverError(error)
+          body = JSON.parse(body)
+          if(response.statusCode == 200) {
+            if(body.data.is_valid) {
+              // Save information.
+              try {
+                let customer = await Customer.findOne({email: req.body.customer.email})
+                if(!customer) customer = await Customer.create(req.body.customer).fetch();
+                res.json({
+                  customer,
+                  token: jwt.sign({id: customer.id, model: 'customer'})
+                })
+
+              }catch(error) {
+                res.serverError(error)
+              }
+            } else res.status(response.statusCode).json(body)
+          } else res.status(response.statusCode).json(body)
+        }
+      )
+    }
+
   },
   async loginBusiness(req, res) {
     try {
