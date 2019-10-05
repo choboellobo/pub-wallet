@@ -7,7 +7,6 @@
 const moment = require('moment');
 const  ObjectId = require('mongodb').ObjectID;
 module.exports = {
-
     async create(req, res) {
       const validator = await sails.helpers.hasAttrs( req.body , ['ticket'])
       if(  !validator  ) res.status(400).json({ message: `Missings ${JSON.stringify(validator.missing)}`})
