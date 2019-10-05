@@ -28,13 +28,13 @@ module.exports = {
   },
    async find(req, res) {
     try{
-
-      const query = {}
+      const query =  {}
+      if(req.query.from && req.query.to) query.createdAt = {'>=': new Date(req.query.from).toISOString(), '<=': new Date(req.query.to).toISOString() }
       if(req.user.model == 'customer') query.expires = {'>=': new Date().toISOString() }
       let tickets = await Ticket.find({where: {
         [req.user.model]: req.user.id,
         ...query
-      }})
+      }}).sort('createdAt DESC')
         .populate('product')
         .populate('customer')
         .populate('business')
