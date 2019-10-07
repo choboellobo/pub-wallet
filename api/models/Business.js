@@ -29,6 +29,9 @@ module.exports = {
       required: true,
       unique: true
     },
+    phone: {
+      type: 'string'
+    },
     cif: {
       type: 'string',
       required: true,
