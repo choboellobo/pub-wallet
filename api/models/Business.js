@@ -32,6 +32,9 @@ module.exports = {
     phone: {
       type: 'string'
     },
+    slides: {
+      type: 'array'
+    },
     cif: {
       type: 'string',
       required: true,
