@@ -33,7 +33,7 @@ module.exports = {
       type: 'string'
     },
     slides: {
-      type: 'array'
+      type: 'json'
     },
     cif: {
       type: 'string',
