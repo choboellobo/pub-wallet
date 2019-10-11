@@ -37,8 +37,10 @@ module.exports = {
   async find(req, res) {
     try {
       let query = {}
-      if(req.query.city) query["location.city"] = req.query.city
-      const business = await Business.findOne()
+      if(req.query.city) query["location.city"] = {contains: req.query.city }
+      if(req.query.name) query.name = { contains: req.query.name }
+      const business = await Business.find({ where: query }).meta({enableExperimentalDeepTargets:true})
+      res.json(business)
     }catch(error) {
       res.serverError(error)
     }
