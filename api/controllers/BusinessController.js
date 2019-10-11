@@ -32,6 +32,16 @@ module.exports = {
     }catch(error) {
       res.serverError(error)
     }
+  },
+
+  async find(req, res) {
+    try {
+      let query = {}
+      if(req.query.city) query["location.city"] = req.query.city
+      const business = await Business.findOne()
+    }catch(error) {
+      res.serverError(error)
+    }
   }
 
 };
