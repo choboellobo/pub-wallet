@@ -20,12 +20,14 @@ const createTicket = async (values, next) => {
     }).fetch()
     const done = await Payment.update({id: values.id}, {...values, ticket: ticket.id,  completed: true}).fetch()
 
-    const notification = {
-      ticket: 'BonoWallet notificación',
-      body: `Enhorabuena, has adquirido ${product.name} de ${product.business.name}`,
-      icon: product.business.icon
-    }
-    firebase.getPushTokenByCustomerIdAndSendNotification(customer, notification);
+    try {
+      const notification = {
+        ticket: 'BonoWallet notificación',
+        body: `Enhorabuena, has adquirido ${product.name} de ${product.business.name}`,
+        icon: product.business.icon
+      }
+      firebase.getPushTokenByCustomerIdAndSendNotification(values.customer, notification);
+    }catch(error) {console.log(error)}
   }
   next()
 }
