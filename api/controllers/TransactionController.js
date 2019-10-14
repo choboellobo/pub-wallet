@@ -6,7 +6,7 @@
  */
 const moment = require('moment');
 const  ObjectId = require('mongodb').ObjectID;
-const firebase = require('firebase');
+const firebase = require('../services/firebase');
 module.exports = {
     async create(req, res) {
       const validator = await sails.helpers.hasAttrs( req.body , ['ticket'])
