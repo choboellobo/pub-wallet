@@ -5,7 +5,8 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 const request = require('request');
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+
 module.exports = {
 
   async loginCustomer(req, res) {

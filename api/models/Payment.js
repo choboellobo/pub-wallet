@@ -5,11 +5,12 @@
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
 const moment = require('moment');
+const firebase = require('../services/firebase')
 const createTicket = async (values, next) => {
 
   if(values.status == 'succeeded' && !values.completed) {
 
-    const product = await Product.findOne(values.product)
+    const product = await Product.findOne(values.product).populate('business')
     const ticket = await Ticket.create({
       customer: values.customer,
       business: values.business,
@@ -19,6 +20,12 @@ const createTicket = async (values, next) => {
     }).fetch()
     const done = await Payment.update({id: values.id}, {...values, ticket: ticket.id,  completed: true}).fetch()
 
+    const notification = {
+      ticket: 'BonoWallet notificación',
+      body: `Enhorabuena, has adquirido ${product.name} de ${product.business.name}`,
+      icon: product.business.icon
+    }
+    firebase.getPushTokenByCustomerIdAndSendNotification(customer, notification);
   }
   next()
 }
