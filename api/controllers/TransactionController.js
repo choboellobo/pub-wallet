@@ -6,6 +6,7 @@
  */
 const moment = require('moment');
 const  ObjectId = require('mongodb').ObjectID;
+const firebase = require('firebase');
 module.exports = {
     async create(req, res) {
       const validator = await sails.helpers.hasAttrs( req.body , ['ticket'])
@@ -25,7 +26,16 @@ module.exports = {
 
           if( (transaction_before + item) <= ticket.product.items ) {
             const transaction = await Transaction.create({ ticket: ticket_ref , item }).fetch()
-            const ticketRef = await Ticket.find({find: ticket_ref}).populate('product')
+            const ticketRef = await Ticket.find({find: ticket_ref}).populate('product');
+            try {
+              const notification = {
+                title: 'BonoWallet Notificación',
+                body: `Transacción completada, te quedan ${ticket.product.items - transaction_before} de  ${transaction_before}. de tu bono ${ticket.product.name}`
+              }
+              firebase.getPushTokenByCustomerIdAndSendNotification(req.user.id,)
+            }
+            catch(err) {console.log(err)}
+
             res.status(201).json({...transaction, item, total: ticket.product.item, current: transaction_before + item, product: ticket.product })
 
           }else res.status(403).json({ message: `Transacción no permitida, quiere ${item} y te quedan ${ticket.product.items - transaction_before} de  ${transaction_before}.`})
