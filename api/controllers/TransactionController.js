@@ -15,7 +15,7 @@ module.exports = {
         const ticket_ref = req.body.ticket;
         const item = req.body.item || 1
 
-        const ticket = await Ticket.findOne({ id: ticket_ref }).populate('business').populate('product')
+        const ticket = await Ticket.findOne({ id: ticket_ref }).populate('business').populate('product').populate('customer')
         if(!ticket) return res.status(404).json({ message: 'Not found'})
         // Check date expires ticket
         if( moment().isAfter(ticket.expires) ) res.status(423).json({ message: "El ticket esta caducado, fecha final de uso " + moment(ticket.expires).format('DD/MM/YYYY')})
@@ -32,7 +32,7 @@ module.exports = {
                 title: 'BonoWallet Notificación',
                 body: `Transacción completada, te quedan ${ticket.product.items - transaction_before} de  ${transaction_before}. de tu bono ${ticket.product.name}`
               }
-              firebase.getPushTokenByCustomerIdAndSendNotification(req.user.id,)
+              firebase.getPushTokenByCustomerIdAndSendNotification(ticket.customer.id, notification)
             }
             catch(err) {console.log(err)}
 
