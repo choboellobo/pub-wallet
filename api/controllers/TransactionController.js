@@ -30,7 +30,9 @@ module.exports = {
             try {
               const notification = {
                 title: 'BonoWallet Notificación',
-                body: `Transacción completada, te quedan ${ticket.product.items - transaction_before} de  ${transaction_before}. de tu bono ${ticket.product.name}`
+                body: `Transacción completada, te quedan ${ticket.product.items - transaction_before} de  ${ ticket.product.item}. de tu bono ${ticket.product.name}`,
+                icon: ticket.product.business.icon,
+                tag: "notification-1"
               }
               firebase.getPushTokenByCustomerIdAndSendNotification(ticket.customer.id, notification)
             }

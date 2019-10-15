@@ -24,7 +24,8 @@ const createTicket = async (values, next) => {
       const notification = {
         ticket: 'BonoWallet notificación',
         body: `Enhorabuena, has adquirido ${product.name} de ${product.business.name}`,
-        icon: product.business.icon
+        icon: product.business.icon,
+        tag: "notification-1"
       }
       firebase.getPushTokenByCustomerIdAndSendNotification(values.customer, notification);
     }catch(error) {console.log(error)}
