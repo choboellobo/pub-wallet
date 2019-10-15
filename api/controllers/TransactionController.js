@@ -30,7 +30,7 @@ module.exports = {
             try {
               const notification = {
                 title: 'BonoWallet Notificación',
-                body: `Transacción completada, te quedan ${ticket.product.items - transaction_before + item } de  ${ ticket.product.items}. de tu bono ${ticket.product.name}`,
+                body: `Transacción completada, te quedan ${ticket.product.items - ( transaction_before + item ) } de  ${ ticket.product.items}. de tu bono ${ticket.product.name}`,
                 tag: "notification-1",
                 icon: ticket.business.icon
               }
