@@ -30,14 +30,15 @@ module.exports = {
             try {
               const notification = {
                 title: 'BonoWallet Notificación',
-                body: `Transacción completada, te quedan ${ticket.product.items - transaction_before} de  ${ ticket.product.item}. de tu bono ${ticket.product.name}`,
-                tag: "notification-1"
+                body: `Transacción completada, te quedan ${ticket.product.items - transaction_before + item } de  ${ ticket.product.items}. de tu bono ${ticket.product.name}`,
+                tag: "notification-1",
+                icon: ticket.business.icon
               }
               firebase.getPushTokenByCustomerIdAndSendNotification(ticket.customer.id, notification)
             }
             catch(err) {console.log(err)}
 
-            res.status(201).json({...transaction, item, total: ticket.product.item, current: transaction_before + item, product: ticket.product })
+            res.status(201).json({...transaction, item, total: ticket.product.items, current: transaction_before + item, product: ticket.product })
 
           }else res.status(403).json({ message: `Transacción no permitida, quiere ${item} y te quedan ${ticket.product.items - transaction_before} de  ${transaction_before}.`})
 
